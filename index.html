@@ -14,51 +14,60 @@
 <title>Tendai Gatahwa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
+  /* ---- light (parchment) is the base; dark (espresso) overrides tokens ---- */
   :root {
-    --ground:   #FBFAF7;
-    --surface:  #FFFFFF;
-    --ink:      #191713;
-    --ink-2:    #5A544A;
-    --ink-3:    #857D70;
-    --rule:     #E2DCD0;
-    --rule-soft:#EFEAE0;
-    --accent:   #8A5A14;
-    --seal:     #1F4436;
+    --ground:    #FAF6EE;
+    --ground-2:  #F3EDE1;
+    --surface:   #FFFDF8;
+    --ink:       #1A1712;
+    --ink-2:     #56503F;
+    --ink-3:     #8A8172;
+    --rule:      #DED5C2;
+    --rule-soft: #ECE4D4;
+    --brass:     #8A5A14;
+    --brass-lift:#A9741F;
+    --seal:      #1F4436;
+    --art-alpha: 0.22;
 
     --display: "Newsreader", "Iowan Old Style", Georgia, serif;
     --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-    --measure: 64ch;
-    --page: 960px;
+    --page: 1000px;
+    --measure: 62ch;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground:   #14120F;
-      --surface:  #1C1915;
-      --ink:      #F2EDE4;
-      --ink-2:    #A79C8C;
-      --ink-3:    #857C6D;
-      --rule:     #322C24;
-      --rule-soft:#262119;
-      --accent:   #D9A441;
-      --seal:     #7FB098;
+      --ground:    #0F0D0B;
+      --ground-2:  #141110;
+      --surface:   #17140F;
+      --ink:       #F4EFE6;
+      --ink-2:     #B5AB99;
+      --ink-3:     #7D7464;
+      --rule:      #2C261E;
+      --rule-soft: #201B15;
+      --brass:     #C9962F;
+      --brass-lift:#E3B85C;
+      --seal:      #86B49C;
+      --art-alpha: 0.24;
     }
   }
-
   :root[data-theme="dark"] {
-    --ground:   #14120F;
-    --surface:  #1C1915;
-    --ink:      #F2EDE4;
-    --ink-2:    #A79C8C;
-    --ink-3:    #857C6D;
-    --rule:     #322C24;
-    --rule-soft:#262119;
-    --accent:   #D9A441;
-    --seal:     #7FB098;
+    --ground:    #0F0D0B;
+    --ground-2:  #141110;
+    --surface:   #17140F;
+    --ink:       #F4EFE6;
+    --ink-2:     #B5AB99;
+    --ink-3:     #7D7464;
+    --rule:      #2C261E;
+    --rule-soft: #201B15;
+    --brass:     #C9962F;
+    --brass-lift:#E3B85C;
+    --seal:      #86B49C;
+    --art-alpha: 0.24;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -69,243 +78,301 @@
     color: var(--ink);
     font-family: var(--body);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.62;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* engraved gold rule across the very top, like a certificate edge */
+  .foil {
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%, var(--brass) 12%, var(--brass-lift) 38%,
+      var(--brass) 62%, transparent 100%);
+    opacity: .85;
   }
 
   .page {
     max-width: var(--page);
     margin: 0 auto;
-    padding: 56px 28px 96px;
+    padding: 0 30px 110px;
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 72px;
   }
 
-  a {
-    color: var(--ink);
-    text-decoration-color: var(--rule);
-    text-underline-offset: 3px;
-    transition: color .15s ease, text-decoration-color .15s ease;
-  }
-  a:hover { color: var(--accent); text-decoration-color: var(--accent); }
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
+  a { color: var(--ink); text-decoration-color: var(--rule); text-underline-offset: 3px;
+      transition: color .18s ease, text-decoration-color .18s ease; }
+  a:hover { color: var(--brass-lift); text-decoration-color: var(--brass); }
+  a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
 
-  /* ---------- masthead ---------- */
+  /* ================= masthead ================= */
+
+  .hero { position: relative; padding: 72px 0 0; }
+
+  .hero-art {
+    position: absolute;
+    top: -96px; right: -232px;
+    width: 660px; height: 660px;
+    pointer-events: none;
+    opacity: var(--art-alpha);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 42%, transparent 74%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 42%, transparent 74%);
+  }
+  .hero-art canvas { width: 100%; height: 100%; display: block; }
 
   .masthead {
+    position: relative;
     display: grid;
-    grid-template-columns: 148px minmax(0, 1fr);
-    gap: 32px;
+    grid-template-columns: 168px minmax(0, 1fr);
+    gap: 40px;
     align-items: start;
   }
 
-  .portrait {
-    aspect-ratio: 1;
+  /* framed plate with engraved corner marks */
+  .plate { position: relative; padding: 9px; }
+  .plate::before {
+    content: ""; position: absolute; inset: 0;
     border: 1px solid var(--rule);
+  }
+  .plate::after {
+    content: ""; position: absolute; inset: 9px;
+    border: 1px solid var(--brass); opacity: .5;
+  }
+  .plate-inner {
+    position: relative;
+    aspect-ratio: 1;
     background: var(--surface);
-    display: grid;
-    place-items: center;
+    display: grid; place-items: center;
     overflow: hidden;
   }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .portrait .monogram {
+  .plate-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .monogram {
     font-family: var(--display);
-    font-size: 46px;
-    font-weight: 500;
-    letter-spacing: .02em;
-    color: var(--accent);
+    font-size: 54px; font-weight: 400;
+    letter-spacing: .04em;
+    color: var(--brass);
+    line-height: 1;
+  }
+  .plate-caption {
+    margin: 12px 0 0;
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3); text-align: center;
   }
 
   .eyebrow {
     font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin: 0 0 14px;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--brass); margin: 0 0 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--rule), transparent);
   }
 
   h1 {
     font-family: var(--display);
     font-optical-sizing: auto;
-    font-size: clamp(42px, 7vw, 64px);
-    font-weight: 500;
-    line-height: 1.04;
-    letter-spacing: -0.015em;
+    font-size: clamp(46px, 8.2vw, 86px);
+    font-weight: 400;
+    line-height: .98;
+    letter-spacing: -0.022em;
     margin: 0;
     text-wrap: balance;
   }
 
   .lede {
     font-family: var(--display);
-    font-size: clamp(18px, 2.3vw, 21px);
-    line-height: 1.45;
-    font-style: italic;
+    font-size: clamp(19px, 2.5vw, 24px);
+    line-height: 1.42; font-style: italic; font-weight: 300;
     color: var(--ink-2);
-    max-width: 44ch;
-    margin: 18px 0 0;
+    max-width: 40ch;
+    margin: 22px 0 0;
+    padding-left: 18px;
+    border-left: 2px solid var(--brass);
   }
 
-  .intro {
-    max-width: var(--measure);
-    margin: 22px 0 0;
-    color: var(--ink-2);
-  }
+  .intro { max-width: var(--measure); margin: 26px 0 0; color: var(--ink-2); }
   .intro strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- record ---------- */
-
-  .record {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    padding: 26px 28px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 22px 36px;
+  /* honours tally */
+  .tally {
+    display: flex; flex-wrap: wrap; gap: 0;
+    margin: 34px 0 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tally div {
+    padding: 16px 30px 16px 0;
+    margin-right: 30px;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .tally div:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .tally .n {
+    font-family: var(--display);
+    font-size: 30px; font-weight: 400; line-height: 1;
+    color: var(--brass-lift);
+    font-variant-numeric: tabular-nums;
+  }
+  .tally .k {
+    display: block; margin-top: 6px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
   }
 
+  /* ================= record ================= */
+
+  .record {
+    background: var(--ground-2);
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--brass);
+    padding: 30px 34px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
+    gap: 26px 40px;
+  }
   .field-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin: 0 0 5px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 6px;
   }
   .field-value { margin: 0; font-size: 15px; line-height: 1.45; }
 
-  /* ---------- sections ---------- */
+  /* ================= sections ================= */
 
-  section { display: flex; flex-direction: column; gap: 26px; }
+  section { display: flex; flex-direction: column; gap: 30px; }
 
   .section-head {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 10px;
+    display: flex; align-items: baseline; gap: 16px;
+    border-bottom: 1px solid var(--ink); padding-bottom: 11px;
   }
   .section-head h2 {
-    font-family: var(--body);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    margin: 0;
+    font-family: var(--body); font-size: 12px; font-weight: 600;
+    letter-spacing: .18em; text-transform: uppercase; margin: 0;
   }
   .section-head .count {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    margin-left: auto;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: auto;
   }
 
-  .ledger { display: flex; flex-direction: column; }
+  /* --- awards rail: a gold spine with year nodes --- */
+  .rail { display: flex; flex-direction: column; }
 
   .entry {
+    position: relative;
     display: grid;
-    grid-template-columns: 116px minmax(0, 1fr);
-    gap: 28px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--rule-soft);
+    grid-template-columns: 122px minmax(0, 1fr);
+    gap: 32px;
+    padding: 26px 0 26px 0;
   }
-  .entry:last-child { border-bottom: none; }
+  .rail .entry { padding-left: 34px; }
+  .rail .entry::before {           /* the spine */
+    content: ""; position: absolute;
+    left: 5px; top: 0; bottom: 0; width: 1px;
+    background: var(--rule);
+  }
+  .rail .entry:first-child::before { top: 30px; }
+  .rail .entry:last-child::before  { bottom: calc(100% - 30px); }
+  .rail .entry::after {            /* the node */
+    content: ""; position: absolute;
+    left: 0; top: 26px; width: 11px; height: 11px;
+    border: 1px solid var(--brass);
+    background: var(--ground);
+    transform: rotate(45deg);
+    transition: background .2s ease;
+  }
+  .rail .entry:hover::after { background: var(--brass); }
+
+  .entry + .entry { border-top: 1px solid var(--rule-soft); }
 
   .entry-date {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--accent);
-    letter-spacing: .02em;
-    padding-top: 4px;
-    font-variant-numeric: tabular-nums;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--brass); letter-spacing: .06em;
+    padding-top: 6px; font-variant-numeric: tabular-nums;
+    text-transform: uppercase;
   }
-
   .entry-title {
     font-family: var(--display);
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.25;
-    margin: 0 0 4px;
-    text-wrap: balance;
+    font-size: 22px; font-weight: 400; line-height: 1.22;
+    margin: 0 0 5px; text-wrap: balance;
   }
   .entry-issuer {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: .04em;
-    color: var(--seal);
-    margin: 0 0 8px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .06em; color: var(--seal); margin: 0 0 10px;
   }
-  .entry-note { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 58ch; }
+  .entry-note { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 56ch; }
+  .entry-links { margin: 11px 0 0; font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
 
-  .entry-links {
-    margin: 9px 0 0;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--ink-3);
-  }
-
-  /* ---------- stack ---------- */
-
-  .stack {
-    font-family: var(--mono);
-    font-size: 13px;
-    line-height: 2.1;
-    color: var(--ink-2);
-    margin: 0;
-    max-width: 74ch;
-  }
-  .stack span { white-space: nowrap; }
-  .stack .sep { color: var(--rule); padding: 0 4px; }
-
-  /* ---------- elsewhere ---------- */
-
-  .elsewhere {
+  /* --- systems grid --- */
+  .systems {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 2px;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1px;
     background: var(--rule);
     border: 1px solid var(--rule);
   }
-  .elsewhere a {
-    background: var(--surface);
-    padding: 18px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-decoration: none;
+  .system {
+    background: var(--ground);
+    padding: 26px 26px 28px;
+    display: flex; flex-direction: column; gap: 9px;
+    transition: background .2s ease;
   }
-  .elsewhere a:hover { background: var(--ground); }
+  .system:hover { background: var(--ground-2); }
+  .system .kind {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--brass);
+  }
+  .system h3 {
+    font-family: var(--display); font-size: 21px; font-weight: 400;
+    line-height: 1.2; margin: 0; text-wrap: balance;
+  }
+  .system p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+  .system .meta {
+    margin-top: auto; padding-top: 6px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+  }
+
+  /* --- stack --- */
+  .stack {
+    font-family: var(--mono); font-size: 13px; line-height: 2.2;
+    color: var(--ink-2); margin: 0; max-width: 76ch;
+  }
+  .stack span { white-space: nowrap; }
+  .stack .sep { color: var(--brass); padding: 0 7px; opacity: .6; }
+
+  /* --- elsewhere --- */
+  .elsewhere {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  }
+  .elsewhere a {
+    background: var(--ground); padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 4px; text-decoration: none;
+    transition: background .2s ease;
+  }
+  .elsewhere a:hover { background: var(--ground-2); }
   .elsewhere .net {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--brass);
   }
   .elsewhere .handle { font-size: 15px; }
 
   footer {
-    border-top: 1px solid var(--rule);
-    padding-top: 20px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--ink-3);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 18px;
+    border-top: 1px solid var(--rule); padding-top: 22px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    display: flex; flex-wrap: wrap; gap: 6px 22px;
   }
 
-  @media (max-width: 620px) {
-    .page { padding: 40px 20px 72px; gap: 44px; }
-    .masthead { grid-template-columns: 104px minmax(0, 1fr); gap: 20px; }
-    .portrait .monogram { font-size: 34px; }
-    .entry { grid-template-columns: 1fr; gap: 8px; }
+  @media (max-width: 680px) {
+    .page { padding: 0 20px 80px; gap: 54px; }
+    .hero { padding-top: 48px; }
+    .hero-art { width: 380px; height: 380px; right: -120px; top: -10px; }
+    .masthead { grid-template-columns: 112px minmax(0, 1fr); gap: 22px; }
+    .monogram { font-size: 36px; }
+    .entry { grid-template-columns: 1fr; gap: 10px; }
+    .rail .entry { padding-left: 28px; }
     .entry-date { padding-top: 0; }
+    .tally div { padding-right: 22px; margin-right: 22px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -314,47 +381,46 @@
 </style>
 </head>
 <body>
+<div class="foil"></div>
 <main class="page">
 
-  <header class="masthead">
-    <div class="portrait">
-      <!-- Replace this monogram with your headshot:
-           <img src="tendai-gatahwa.jpg" alt="Tendai Gatahwa"> -->
-      <span class="monogram">TG</span>
-    </div>
-    <div>
-      <p class="eyebrow">Computer scientist &middot; Harare, Zimbabwe</p>
-      <h1>Tendai Gatahwa</h1>
-      <p class="lede">I build autonomous AI agents that think, act and deliver &mdash; without human babysitting.</p>
-      <p class="intro">Computer scientist and founder. <strong>Resident Innovator</strong> at Midlands State University&rsquo;s Research and Innovation division since 2021, and <strong>Chief Executive Officer of NerdiQ</strong>. Five national and international innovation awards between 2021 and 2024, among them the Presidential Award of Excellence and the Chancellor&rsquo;s Award for the overall best undergraduate innovation in Zimbabwe.</p>
-    </div>
-  </header>
+  <div class="hero">
+    <div class="hero-art" aria-hidden="true"><canvas id="guilloche"></canvas></div>
+
+    <header class="masthead">
+      <div>
+        <div class="plate">
+          <div class="plate-inner">
+            <!-- Replace the monogram with the headshot:
+                 <img src="tendai-gatahwa.jpg" alt="Tendai Gatahwa"> -->
+            <span class="monogram">TG</span>
+          </div>
+        </div>
+        <p class="plate-caption">Harare &middot; ZW</p>
+      </div>
+
+      <div>
+        <p class="eyebrow">Computer scientist</p>
+        <h1>Tendai Gatahwa</h1>
+        <p class="lede">I build autonomous AI agents that think, act and deliver &mdash; without human babysitting.</p>
+        <p class="intro">Computer scientist and founder. <strong>Resident Innovator</strong> at Midlands State University&rsquo;s Research and Innovation division since 2021, and <strong>Chief Executive Officer of NerdiQ</strong>. Five national and international innovation awards between 2021 and 2024, among them the Presidential Award of Excellence and the Chancellor&rsquo;s Award for the overall best undergraduate innovation in Zimbabwe.</p>
+
+        <div class="tally">
+          <div><span class="n">5</span><span class="k">National &amp; intl. awards</span></div>
+          <div><span class="n">6</span><span class="k">Systems in production</span></div>
+          <div><span class="n">2021</span><span class="k">Innovating since</span></div>
+        </div>
+      </div>
+    </header>
+  </div>
 
   <div class="record">
-    <div>
-      <p class="field-label">Full name</p>
-      <p class="field-value">Tendai Gatahwa</p>
-    </div>
-    <div>
-      <p class="field-label">Role</p>
-      <p class="field-value">Chief Executive Officer, NerdiQ</p>
-    </div>
-    <div>
-      <p class="field-label">Based</p>
-      <p class="field-value">Harare, Zimbabwe</p>
-    </div>
-    <div>
-      <p class="field-label">Field</p>
-      <p class="field-value">Artificial intelligence, systems engineering</p>
-    </div>
-    <div>
-      <p class="field-label">Education</p>
-      <p class="field-value">BSc (Honours) Computer Science, Midlands State University, 2024</p>
-    </div>
-    <div>
-      <p class="field-label">Ventures</p>
-      <p class="field-value">NerdiQ &middot; KurasikaLabs &middot; Auxmatic</p>
-    </div>
+    <div><p class="field-label">Full name</p><p class="field-value">Tendai Gatahwa</p></div>
+    <div><p class="field-label">Role</p><p class="field-value">Chief Executive Officer, NerdiQ</p></div>
+    <div><p class="field-label">Based</p><p class="field-value">Harare, Zimbabwe</p></div>
+    <div><p class="field-label">Field</p><p class="field-value">Artificial intelligence, systems engineering</p></div>
+    <div><p class="field-label">Education</p><p class="field-value">BSc (Honours) Computer Science, Midlands State University, 2024</p></div>
+    <div><p class="field-label">Ventures</p><p class="field-value">NerdiQ &middot; KurasikaLabs &middot; Auxmatic</p></div>
   </div>
 
   <section>
@@ -362,7 +428,7 @@
       <h2>Recognition</h2>
       <span class="count">5 awards &middot; 2021&ndash;2024</span>
     </div>
-    <div class="ledger">
+    <div class="rail">
 
       <article class="entry">
         <div class="entry-date">Nov 2024</div>
@@ -413,10 +479,8 @@
   </section>
 
   <section>
-    <div class="section-head">
-      <h2>Positions</h2>
-    </div>
-    <div class="ledger">
+    <div class="section-head"><h2>Positions</h2></div>
+    <div class="rail">
 
       <article class="entry">
         <div class="entry-date">Present</div>
@@ -428,7 +492,7 @@
       </article>
 
       <article class="entry">
-        <div class="entry-date">2021&ndash;</div>
+        <div class="entry-date">2021 &ndash;</div>
         <div>
           <h3 class="entry-title">Resident Innovator, Computer Science</h3>
           <p class="entry-issuer">MSU Research and Innovation &middot; Gweru</p>
@@ -451,91 +515,76 @@
   <section>
     <div class="section-head">
       <h2>Selected systems</h2>
+      <span class="count">6 shipped</span>
     </div>
-    <div class="ledger">
+    <div class="systems">
 
-      <article class="entry">
-        <div class="entry-date">AI</div>
-        <div>
-          <h3 class="entry-title">ZimSmart AI</h3>
-          <p class="entry-note">A platform putting machine learning behind business decision-making and process automation, measured at a 30% efficiency gain.</p>
-          <p class="entry-links">Python &middot; TensorFlow &middot; Laravel</p>
-        </div>
+      <article class="system">
+        <span class="kind">Artificial intelligence</span>
+        <h3>ZimSmart AI</h3>
+        <p>Machine learning behind business decision-making and process automation, measured at a 30% efficiency gain.</p>
+        <p class="meta">Python &middot; TensorFlow &middot; Laravel</p>
       </article>
 
-      <article class="entry">
-        <div class="entry-date">Education</div>
-        <div>
-          <h3 class="entry-title">NerdEdu &mdash; school ERP</h3>
-          <p class="entry-note">Enterprise resource planning for schools: attendance, grading, and communication between staff, students and parents. Running in multiple schools.</p>
-          <p class="entry-links"><a href="https://nerdedu.cloud/" rel="noopener">nerdedu.cloud</a> &middot; Laravel &middot; MySQL</p>
-        </div>
+      <article class="system">
+        <span class="kind">Education</span>
+        <h3>NerdEdu &mdash; school ERP</h3>
+        <p>Attendance, grading and staff&ndash;parent communication for schools. Running in multiple Zimbabwean schools.</p>
+        <p class="meta"><a href="https://nerdedu.cloud/" rel="noopener">nerdedu.cloud</a> &middot; Laravel &middot; MySQL</p>
       </article>
 
-      <article class="entry">
-        <div class="entry-date">Mobile</div>
-        <div>
-          <h3 class="entry-title">MyLibrary</h3>
-          <p class="entry-note">The Midlands State University digital library: students browse, borrow and read on Android. Adopted by several schools beyond MSU.</p>
-          <p class="entry-links"><a href="https://play.google.com/store/apps/details?id=com.msu.myLibrary" rel="noopener">Google Play</a> &middot; Flutter &middot; Firebase</p>
-        </div>
+      <article class="system">
+        <span class="kind">Mobile</span>
+        <h3>MyLibrary</h3>
+        <p>The Midlands State University digital library: browse, borrow and read on Android. Adopted beyond MSU.</p>
+        <p class="meta"><a href="https://play.google.com/store/apps/details?id=com.msu.myLibrary" rel="noopener">Google Play</a> &middot; Flutter &middot; Firebase</p>
       </article>
 
-      <article class="entry">
-        <div class="entry-date">Education</div>
-        <div>
-          <h3 class="entry-title">Umali &mdash; post-graduation e-learning</h3>
-          <p class="entry-note">An online platform for graduates continuing into further courses and certifications.</p>
-          <p class="entry-links"><a href="http://umali.msu.ac.zw/" rel="noopener">umali.msu.ac.zw</a> &middot; Laravel &middot; MySQL</p>
-        </div>
+      <article class="system">
+        <span class="kind">Education</span>
+        <h3>Umali</h3>
+        <p>A post-graduation e-learning platform for graduates continuing into further courses and certifications.</p>
+        <p class="meta"><a href="http://umali.msu.ac.zw/" rel="noopener">umali.msu.ac.zw</a> &middot; Laravel &middot; MySQL</p>
       </article>
 
-      <article class="entry">
-        <div class="entry-date">VR</div>
-        <div>
-          <h3 class="entry-title">VR Chemistry Lab</h3>
-          <p class="entry-note">Simulated practicals for remote schools without laboratory access; recognised nationally for its impact on education in underserved areas.</p>
-          <p class="entry-links">Unity &middot; C# &middot; VR SDK</p>
-        </div>
+      <article class="system">
+        <span class="kind">Virtual reality</span>
+        <h3>VR Chemistry Lab</h3>
+        <p>Simulated practicals for schools without laboratory access; recognised nationally for its impact in underserved areas.</p>
+        <p class="meta">Unity &middot; C# &middot; VR SDK</p>
       </article>
 
-      <article class="entry">
-        <div class="entry-date">Field ops</div>
-        <div>
-          <h3 class="entry-title">Pristine Panels</h3>
-          <p class="entry-note">A field-operations platform covering booking, inspection, WhatsApp messaging and payments, with customer, admin and engineer apps over one Go API.</p>
-          <p class="entry-links">Go &middot; Flutter &middot; PostgreSQL &middot; WhatsApp Business API</p>
-        </div>
+      <article class="system">
+        <span class="kind">Field operations</span>
+        <h3>Pristine Panels</h3>
+        <p>Booking, inspection, WhatsApp messaging and payments across customer, admin and engineer apps on one Go API.</p>
+        <p class="meta">Go &middot; Flutter &middot; PostgreSQL &middot; WhatsApp API</p>
       </article>
 
     </div>
   </section>
 
   <section>
-    <div class="section-head">
-      <h2>Stack</h2>
-    </div>
+    <div class="section-head"><h2>Stack</h2></div>
     <p class="stack">
       <span>Go</span><span class="sep">/</span><span>TypeScript</span><span class="sep">/</span><span>Python</span><span class="sep">/</span><span>Flutter &amp; Dart</span><span class="sep">/</span><span>Java</span><span class="sep">/</span><span>Laravel</span><span class="sep">/</span><span>PostgreSQL</span><span class="sep">/</span><span>Supabase</span><span class="sep">/</span><span>AWS</span><span class="sep">/</span><span>Docker</span><span class="sep">/</span><span>Kubernetes</span><span class="sep">/</span><span>Terraform</span><span class="sep">/</span><span>Kafka</span><span class="sep">/</span><span>TensorFlow</span><span class="sep">/</span><span>PyTorch</span><span class="sep">/</span><span>Hugging Face</span><span class="sep">/</span><span>Anthropic API</span>
     </p>
   </section>
 
   <section>
-    <div class="section-head">
-      <h2>Elsewhere</h2>
-    </div>
+    <div class="section-head"><h2>Elsewhere</h2></div>
     <nav class="elsewhere">
       <a href="https://www.linkedin.com/in/tendai-gatahwa" rel="me noopener">
-        <span class="net">LinkedIn</span>
-        <span class="handle">in/tendai-gatahwa</span>
+        <span class="net">LinkedIn</span><span class="handle">in/tendai-gatahwa</span>
       </a>
       <a href="https://github.com/tendai-gatahwa" rel="me noopener">
-        <span class="net">GitHub</span>
-        <span class="handle">tendai-gatahwa</span>
+        <span class="net">GitHub</span><span class="handle">tendai-gatahwa</span>
+      </a>
+      <a href="https://github.com/tendai-dev" rel="me noopener">
+        <span class="net">GitHub</span><span class="handle">tendai-dev</span>
       </a>
       <a href="mailto:tendai@kurasika.tech" rel="me">
-        <span class="net">Email</span>
-        <span class="handle">tendai@kurasika.tech</span>
+        <span class="net">Email</span><span class="handle">tendai@kurasika.tech</span>
       </a>
     </nav>
   </section>
@@ -543,10 +592,87 @@
   <footer>
     <span>Tendai Gatahwa</span>
     <span>Harare, Zimbabwe</span>
-    <span>Last updated September 2026</span>
+    <span>Updated September 2026</span>
   </footer>
 
 </main>
+
+<script>
+/* Guilloche: nested hypotrochoids, the engraved rosette used on certificates
+   and banknotes. Drawn rather than hand-authored as SVG path data. */
+(function () {
+  var cv = document.getElementById('guilloche');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var RINGS = [
+    { R: 232, r: 41, d: 96,  turns: 41, w: 0.6 },
+    { R: 196, r: 29, d: 74,  turns: 29, w: 0.5 },
+    { R: 150, r: 23, d: 108, turns: 23, w: 0.45 }
+  ];
+
+  function brass() {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--brass-lift').trim() || '#C9962F';
+  }
+
+  function sizeCanvas() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var box = cv.getBoundingClientRect();
+    cv.width = Math.max(1, Math.round(box.width * dpr));
+    cv.height = Math.max(1, Math.round(box.height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { w: box.width, h: box.height };
+  }
+
+  function draw(progress) {
+    var s = sizeCanvas();
+    ctx.clearRect(0, 0, s.w, s.h);
+    var cx = s.w / 2, cy = s.h / 2;
+    var scale = Math.min(s.w, s.h) / 560;
+    var stroke = brass();
+
+    RINGS.forEach(function (ring, i) {
+      var total = ring.turns * Math.PI * 2;
+      var end = total * progress;
+      var step = 0.035;
+      ctx.beginPath();
+      for (var t = 0; t <= end; t += step) {
+        var k = (ring.R - ring.r);
+        var x = cx + (k * Math.cos(t) + ring.d * Math.cos(k / ring.r * t)) * scale;
+        var y = cy + (k * Math.sin(t) - ring.d * Math.sin(k / ring.r * t)) * scale;
+        if (t === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = ring.w;
+      ctx.globalAlpha = 0.85 - i * 0.16;
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  if (reduce) {
+    draw(1);
+  } else {
+    var t0 = null, DUR = 2200;
+    requestAnimationFrame(function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / DUR, 1);
+      draw(1 - Math.pow(1 - p, 3));           // ease-out cubic
+      if (p < 1) requestAnimationFrame(step);
+    });
+  }
+
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { draw(1); }, 150);
+  });
+  window.matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', function () { draw(1); });
+})();
+</script>
 
 <script type="application/ld+json">
 {
@@ -566,10 +692,7 @@
     "addressLocality": "Harare",
     "addressCountry": "ZW"
   },
-  "worksFor": {
-    "@type": "Organization",
-    "name": "NerdiQ"
-  },
+  "worksFor": { "@type": "Organization", "name": "NerdiQ" },
   "alumniOf": {
     "@type": "CollegeOrUniversity",
     "name": "Midlands State University",
