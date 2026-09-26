@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tendai Gatahwa is a computer scientist and founder in Harare, Zimbabwe, building autonomous AI agents and production systems. Recipient of the Presidential Award of Excellence and the Chancellor's Award for Best Innovation.">
+<link rel="canonical" href="https://tendai-dev.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Tendai Gatahwa">
+<meta property="og:description" content="Computer scientist and founder in Harare, Zimbabwe. Autonomous AI agents and production systems.">
+<meta property="og:url" content="https://tendai-dev.github.io/">
+<meta name="twitter:card" content="summary">
+<!-- ARTIFACT-BODY-START -->
+<title>Tendai Gatahwa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground:   #FBFAF7;
+    --surface:  #FFFFFF;
+    --ink:      #191713;
+    --ink-2:    #5A544A;
+    --ink-3:    #857D70;
+    --rule:     #E2DCD0;
+    --rule-soft:#EFEAE0;
+    --accent:   #8A5A14;
+    --seal:     #1F4436;
+
+    --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --measure: 64ch;
+    --page: 960px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:   #14120F;
+      --surface:  #1C1915;
+      --ink:      #F2EDE4;
+      --ink-2:    #A79C8C;
+      --ink-3:    #857C6D;
+      --rule:     #322C24;
+      --rule-soft:#262119;
+      --accent:   #D9A441;
+      --seal:     #7FB098;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:   #14120F;
+    --surface:  #1C1915;
+    --ink:      #F2EDE4;
+    --ink-2:    #A79C8C;
+    --ink-3:    #857C6D;
+    --rule:     #322C24;
+    --rule-soft:#262119;
+    --accent:   #D9A441;
+    --seal:     #7FB098;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  a {
+    color: var(--ink);
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+    transition: color .15s ease, text-decoration-color .15s ease;
+  }
+  a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: grid;
+    grid-template-columns: 148px minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+
+  .portrait {
+    aspect-ratio: 1;
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait .monogram {
+    font-family: var(--display);
+    font-size: 46px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    color: var(--accent);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-optical-sizing: auto;
+    font-size: clamp(42px, 7vw, 64px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-family: var(--display);
+    font-size: clamp(18px, 2.3vw, 21px);
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--ink-2);
+    max-width: 44ch;
+    margin: 18px 0 0;
+  }
+
+  .intro {
+    max-width: var(--measure);
+    margin: 22px 0 0;
+    color: var(--ink-2);
+  }
+  .intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- record ---------- */
+
+  .record {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 22px 36px;
+  }
+
+  .field-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 5px;
+  }
+  .field-value { margin: 0; font-size: 15px; line-height: 1.45; }
+
+  /* ---------- sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 26px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 10px;
+  }
+  .section-head h2 {
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .section-head .count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-left: auto;
+  }
+
+  .ledger { display: flex; flex-direction: column; }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 116px minmax(0, 1fr);
+    gap: 28px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .entry:last-child { border-bottom: none; }
+
+  .entry-date {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    letter-spacing: .02em;
+    padding-top: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .entry-title {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 4px;
+    text-wrap: balance;
+  }
+  .entry-issuer {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .04em;
+    color: var(--seal);
+    margin: 0 0 8px;
+  }
+  .entry-note { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 58ch; }
+
+  .entry-links {
+    margin: 9px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+
+  /* ---------- stack ---------- */
+
+  .stack {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 2.1;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 74ch;
+  }
+  .stack span { white-space: nowrap; }
+  .stack .sep { color: var(--rule); padding: 0 4px; }
+
+  /* ---------- elsewhere ---------- */
+
+  .elsewhere {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 2px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .elsewhere a {
+    background: var(--surface);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-decoration: none;
+  }
+  .elsewhere a:hover { background: var(--ground); }
+  .elsewhere .net {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .elsewhere .handle { font-size: 15px; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+
+  @media (max-width: 620px) {
+    .page { padding: 40px 20px 72px; gap: 44px; }
+    .masthead { grid-template-columns: 104px minmax(0, 1fr); gap: 20px; }
+    .portrait .monogram { font-size: 34px; }
+    .entry { grid-template-columns: 1fr; gap: 8px; }
+    .entry-date { padding-top: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="masthead">
+    <div class="portrait">
+      <!-- Replace this monogram with your headshot:
+           <img src="tendai-gatahwa.jpg" alt="Tendai Gatahwa"> -->
+      <span class="monogram">TG</span>
+    </div>
+    <div>
+      <p class="eyebrow">Computer scientist &middot; Harare, Zimbabwe</p>
+      <h1>Tendai Gatahwa</h1>
+      <p class="lede">I build autonomous AI agents that think, act and deliver &mdash; without human babysitting.</p>
+      <p class="intro">Computer scientist and founder. <strong>Resident Innovator</strong> at Midlands State University&rsquo;s Research and Innovation division since 2021, and <strong>Chief Executive Officer of NerdiQ</strong>. Five national and international innovation awards between 2021 and 2024, among them the Presidential Award of Excellence and the Chancellor&rsquo;s Award for the overall best undergraduate innovation in Zimbabwe.</p>
+    </div>
+  </header>
+
+  <div class="record">
+    <div>
+      <p class="field-label">Full name</p>
+      <p class="field-value">Tendai Gatahwa</p>
+    </div>
+    <div>
+      <p class="field-label">Role</p>
+      <p class="field-value">Chief Executive Officer, NerdiQ</p>
+    </div>
+    <div>
+      <p class="field-label">Based</p>
+      <p class="field-value">Harare, Zimbabwe</p>
+    </div>
+    <div>
+      <p class="field-label">Field</p>
+      <p class="field-value">Artificial intelligence, systems engineering</p>
+    </div>
+    <div>
+      <p class="field-label">Education</p>
+      <p class="field-value">BSc (Honours) Computer Science, Midlands State University, 2024</p>
+    </div>
+    <div>
+      <p class="field-label">Ventures</p>
+      <p class="field-value">NerdiQ &middot; KurasikaLabs &middot; Auxmatic</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>Recognition</h2>
+      <span class="count">5 awards &middot; 2021&ndash;2024</span>
+    </div>
+    <div class="ledger">
+
+      <article class="entry">
+        <div class="entry-date">Nov 2024</div>
+        <div>
+          <h3 class="entry-title">Dr. E. D. Mnangagwa Chancellor&rsquo;s Award</h3>
+          <p class="entry-issuer">Midlands State University</p>
+          <p class="entry-note">Overall Best Innovation from a student at undergraduate level, for the most exceptional undergraduate innovation of the year.</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Mar 2023</div>
+        <div>
+          <h3 class="entry-title">Presidential Award of Excellence</h3>
+          <p class="entry-issuer">Ministry of Higher and Tertiary Education, Zimbabwe</p>
+          <p class="entry-note">Awarded for exceptional leadership and ground-breaking innovation of significant national impact.</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Jul 2022</div>
+        <div>
+          <h3 class="entry-title">National Student Cluster Building Competition &mdash; Winner</h3>
+          <p class="entry-issuer">Zimbabwe Centre for High-Performance Computing</p>
+          <p class="entry-note">Led the winning team in building high-performance computing clusters, earning a scholarship from the Ministry of Education, Science and Technology.</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Apr 2022</div>
+        <div>
+          <h3 class="entry-title">Best Innovator Award</h3>
+          <p class="entry-issuer">Zimbabwe International Trade Fair &middot; Innovation Forum</p>
+          <p class="entry-note">Recognised for AI-driven business solutions setting new benchmarks in industry practice.</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Nov 2021</div>
+        <div>
+          <h3 class="entry-title">UNESCO India&ndash;Africa Hackathon &mdash; First Place</h3>
+          <p class="entry-issuer">UNESCO</p>
+          <p class="entry-note">Represented Zimbabwe in the international hackathon; the team&rsquo;s project took first place.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Positions</h2>
+    </div>
+    <div class="ledger">
+
+      <article class="entry">
+        <div class="entry-date">Present</div>
+        <div>
+          <h3 class="entry-title">Chief Executive Officer</h3>
+          <p class="entry-issuer">NerdiQ</p>
+          <p class="entry-note">Autonomous AI agents and the education technology built on them.</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">2021&ndash;</div>
+        <div>
+          <h3 class="entry-title">Resident Innovator, Computer Science</h3>
+          <p class="entry-issuer">MSU Research and Innovation &middot; Gweru</p>
+          <p class="entry-note">Research on emerging technologies, prototypes taken from thesis to working system, and mentorship of junior developers.</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Founder</div>
+        <div>
+          <h3 class="entry-title">KurasikaLabs &amp; Auxmatic</h3>
+          <p class="entry-issuer">kurasika.tech &middot; auxmatic.com</p>
+          <p class="entry-note">Applied AI engineering: production agents, mobile products and field-operations platforms.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Selected systems</h2>
+    </div>
+    <div class="ledger">
+
+      <article class="entry">
+        <div class="entry-date">AI</div>
+        <div>
+          <h3 class="entry-title">ZimSmart AI</h3>
+          <p class="entry-note">A platform putting machine learning behind business decision-making and process automation, measured at a 30% efficiency gain.</p>
+          <p class="entry-links">Python &middot; TensorFlow &middot; Laravel</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Education</div>
+        <div>
+          <h3 class="entry-title">NerdEdu &mdash; school ERP</h3>
+          <p class="entry-note">Enterprise resource planning for schools: attendance, grading, and communication between staff, students and parents. Running in multiple schools.</p>
+          <p class="entry-links"><a href="https://nerdedu.cloud/" rel="noopener">nerdedu.cloud</a> &middot; Laravel &middot; MySQL</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Mobile</div>
+        <div>
+          <h3 class="entry-title">MyLibrary</h3>
+          <p class="entry-note">The Midlands State University digital library: students browse, borrow and read on Android. Adopted by several schools beyond MSU.</p>
+          <p class="entry-links"><a href="https://play.google.com/store/apps/details?id=com.msu.myLibrary" rel="noopener">Google Play</a> &middot; Flutter &middot; Firebase</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Education</div>
+        <div>
+          <h3 class="entry-title">Umali &mdash; post-graduation e-learning</h3>
+          <p class="entry-note">An online platform for graduates continuing into further courses and certifications.</p>
+          <p class="entry-links"><a href="http://umali.msu.ac.zw/" rel="noopener">umali.msu.ac.zw</a> &middot; Laravel &middot; MySQL</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">VR</div>
+        <div>
+          <h3 class="entry-title">VR Chemistry Lab</h3>
+          <p class="entry-note">Simulated practicals for remote schools without laboratory access; recognised nationally for its impact on education in underserved areas.</p>
+          <p class="entry-links">Unity &middot; C# &middot; VR SDK</p>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-date">Field ops</div>
+        <div>
+          <h3 class="entry-title">Pristine Panels</h3>
+          <p class="entry-note">A field-operations platform covering booking, inspection, WhatsApp messaging and payments, with customer, admin and engineer apps over one Go API.</p>
+          <p class="entry-links">Go &middot; Flutter &middot; PostgreSQL &middot; WhatsApp Business API</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Stack</h2>
+    </div>
+    <p class="stack">
+      <span>Go</span><span class="sep">/</span><span>TypeScript</span><span class="sep">/</span><span>Python</span><span class="sep">/</span><span>Flutter &amp; Dart</span><span class="sep">/</span><span>Java</span><span class="sep">/</span><span>Laravel</span><span class="sep">/</span><span>PostgreSQL</span><span class="sep">/</span><span>Supabase</span><span class="sep">/</span><span>AWS</span><span class="sep">/</span><span>Docker</span><span class="sep">/</span><span>Kubernetes</span><span class="sep">/</span><span>Terraform</span><span class="sep">/</span><span>Kafka</span><span class="sep">/</span><span>TensorFlow</span><span class="sep">/</span><span>PyTorch</span><span class="sep">/</span><span>Hugging Face</span><span class="sep">/</span><span>Anthropic API</span>
+    </p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Elsewhere</h2>
+    </div>
+    <nav class="elsewhere">
+      <a href="https://www.linkedin.com/in/tendai-gatahwa" rel="me noopener">
+        <span class="net">LinkedIn</span>
+        <span class="handle">in/tendai-gatahwa</span>
+      </a>
+      <a href="https://github.com/tendai-gatahwa" rel="me noopener">
+        <span class="net">GitHub</span>
+        <span class="handle">tendai-gatahwa</span>
+      </a>
+      <a href="mailto:tendai@kurasika.tech" rel="me">
+        <span class="net">Email</span>
+        <span class="handle">tendai@kurasika.tech</span>
+      </a>
+    </nav>
+  </section>
+
+  <footer>
+    <span>Tendai Gatahwa</span>
+    <span>Harare, Zimbabwe</span>
+    <span>Last updated September 2026</span>
+  </footer>
+
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://tendai-dev.github.io/#person",
+  "name": "Tendai Gatahwa",
+  "givenName": "Tendai",
+  "familyName": "Gatahwa",
+  "url": "https://tendai-dev.github.io/",
+  "jobTitle": "Chief Executive Officer",
+  "description": "Computer scientist and founder in Harare, Zimbabwe, building autonomous AI agents and production systems.",
+  "email": "mailto:tendai@kurasika.tech",
+  "nationality": { "@type": "Country", "name": "Zimbabwe" },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Harare",
+    "addressCountry": "ZW"
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "NerdiQ"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Midlands State University",
+    "url": "https://www.msu.ac.zw/"
+  },
+  "knowsAbout": [
+    "Artificial intelligence",
+    "Autonomous AI agents",
+    "Machine learning",
+    "Software engineering",
+    "High-performance computing",
+    "Mobile application development"
+  ],
+  "award": [
+    "Dr. E. D. Mnangagwa Chancellor's Award for Overall Best Innovation from a Student at Undergraduate Level (2024)",
+    "Presidential Award of Excellence, Ministry of Higher and Tertiary Education, Zimbabwe (2023)",
+    "National Student Cluster Building Competition Winner, Zimbabwe Centre for High-Performance Computing (2022)",
+    "Best Innovator Award, Zimbabwe International Trade Fair Innovation Forum (2022)",
+    "UNESCO India-Africa Hackathon Winner (2021)"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/tendai-gatahwa",
+    "https://github.com/tendai-gatahwa",
+    "https://github.com/tendai-dev"
+  ]
+}
+</script>
+<!-- ARTIFACT-BODY-END -->
+</body>
+</html>
